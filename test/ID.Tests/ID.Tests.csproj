@@ -7,11 +7,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="TestKitchen.TestAdapter" Version="0.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TestKitchen\src\TestKitchen.TestAdapter\TestKitchen.TestAdapter.csproj" />
-    <ProjectReference Include="..\ID\ID.csproj" />
+    <ProjectReference Include="..\..\src\ID\ID.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace ID
 {
-    public class SecureHashProvider : Sodium, ISecureHashProvider
+    public sealed class SecureHashProvider : ISecureHashProvider
     {
         private readonly IOptionsMonitor<SecurityOptions> _options;
 
@@ -16,7 +16,7 @@ namespace ID
 
         public ReadOnlySpan<byte> Password(ReadOnlySpan<byte> password)
         {
-            const int size = 16;
+            const int size = 128;
             const long opsLimit = 3;
 
             Span<byte> buffer = new byte[size];
@@ -25,9 +25,9 @@ namespace ID
             
             unsafe
             {
-                fixed (byte* b = &buffer.GetPinnableReference())
+                fixed (byte* b = buffer)
                 {
-                    fixed (byte* p = &password.GetPinnableReference())
+                    fixed (byte* p = password)
                     {
                         Libsodium.crypto_pwhash_str(b, p, password.Length, opsLimit, memLimit);
                     }

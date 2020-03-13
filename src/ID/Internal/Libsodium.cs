@@ -9,6 +9,8 @@ namespace ID.Internal
     {
         private const string DllName = "libsodium";
 
+        static Libsodium() => sodium_init();
+
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void sodium_init();
 
